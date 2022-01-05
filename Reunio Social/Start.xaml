@@ -1,0 +1,53 @@
+﻿<Window x:Class="ReunioSocial.Start"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReunioSocial"
+        xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Start" Height="450" Width="800"
+        FontSize="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Configuracio Escenari" FontSize="30" Grid.ColumnSpan="3"/>
+        <!-- Files -->
+        <TextBlock Text="Files" Grid.Row="1"/>
+        <xceed:IntegerUpDown Grid.Row="1" Grid.Column="1" Value="{Binding ElementName=sldFiles, Path=Value}"/>
+        <Slider x:Name="sldFiles" Value="0" Grid.Row="1" Grid.Column="2" Minimum="0"/>
+        <!-- Columnes -->
+        <TextBlock Text="Columnes" Grid.Row="2"/>
+        <xceed:IntegerUpDown Grid.Row="2" Grid.Column="1" Value="{Binding ElementName=sldColumnes, Path=Value}"/>
+        <Slider x:Name="sldColumnes" Value="0" Grid.Row="2" Grid.Column="2" Minimum="0"/>
+
+        <!-- Homes -->
+        <TextBlock Text="Homes" Grid.Row="3"/>
+        <xceed:IntegerUpDown Grid.Row="3" Grid.Column="1" Value="{Binding ElementName=sldHomes, Path=Value}"/>
+        <Slider x:Name="sldHomes" Value="0" Grid.Row="3" Grid.Column="2" Minimum="0"/>
+
+        <!-- Dones -->
+        <TextBlock Text="Dones" Grid.Row="4"/>
+        <xceed:IntegerUpDown Grid.Row="4" Grid.Column="1" Value="{Binding ElementName=sldDones, Path=Value}"/>
+        <Slider x:Name="sldDones" Value="0" Grid.Row="4" Grid.Column="2" Minimum="0"/>
+
+        <!-- Cambrers -->
+        <TextBlock Text="Cambrers" Grid.Row="5"/>
+        <xceed:IntegerUpDown Grid.Row="5" Grid.Column="1" Value="{Binding ElementName=sldCambrers, Path=Value}"/>
+        <Slider x:Name="sldCambrers" Value="0" Grid.Row="5" Grid.Column="2" Minimum="0"/>
+
+        <Button Content="Start Simulation" Name="btnSimulationStart" Click="btnSimulationStart_Click" Grid.Row="6" Grid.ColumnSpan="3" Margin="100,10,100,10"/>
+    </Grid>
+</Window>

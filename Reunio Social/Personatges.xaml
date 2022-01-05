@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Reunio_Social">
+    
+    <BitmapImage x:Key="CambrerKey" UriSource="/Imatges/Camarer.png"/>
+    <BitmapImage x:Key="Home1Key" UriSource="/Imatges/Home1.jpg"/>
+    <BitmapImage x:Key="Home2Key" UriSource="/Imatges/Home2.jpg"/>
+    <BitmapImage x:Key="Home3Key" UriSource="/Imatges/Home3.jpg"/>
+    <BitmapImage x:Key="Dona1Key" UriSource="/Imatges/Dona1.jpg"/>
+    <BitmapImage x:Key="Dona2Key" UriSource="/Imatges/Dona2.jpg"/>
+    <BitmapImage x:Key="Dona3Key" UriSource="/Imatges/Dona3.jpg"/>
+    <BitmapImage x:Key="DonaAddKey" UriSource="/Imatges/DonaAfegir.png"/>
+    <BitmapImage x:Key="HomeAddKey" UriSource="/Imatges/HomeAfegir.jpg"/>
+    <BitmapImage x:Key="ExitKey" UriSource="/Imatges/exitSign.jpg"/>
+    <BitmapImage x:Key="CamarerAdd" UriSource="/Imatges/CamarerAfegir.jpg"/>
+</ResourceDictionary>

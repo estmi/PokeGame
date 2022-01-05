@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>ReunioSocial</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Imatges\Camarer.png" />
+    <None Remove="Imatges\CamarerAfegir.jpg" />
+    <None Remove="Imatges\Cambrer.png" />
+    <None Remove="Imatges\Dona0.png" />
+    <None Remove="Imatges\Dona1.jpg" />
+    <None Remove="Imatges\Dona1.png" />
+    <None Remove="Imatges\Dona2.jpg" />
+    <None Remove="Imatges\Dona2.png" />
+    <None Remove="Imatges\Dona3.jpg" />
+    <None Remove="Imatges\Dona3.png" />
+    <None Remove="Imatges\Dona4.png" />
+    <None Remove="Imatges\Dona5.png" />
+    <None Remove="Imatges\Dona6.png" />
+    <None Remove="Imatges\Dona7.png" />
+    <None Remove="Imatges\Dona8.png" />
+    <None Remove="Imatges\Dona9.png" />
+    <None Remove="Imatges\DonaAfegir.png" />
+    <None Remove="Imatges\exitSign.jpg" />
+    <None Remove="Imatges\Home0.png" />
+    <None Remove="Imatges\Home1.jpg" />
+    <None Remove="Imatges\Home1.png" />
+    <None Remove="Imatges\Home2.jpg" />
+    <None Remove="Imatges\Home2.png" />
+    <None Remove="Imatges\Home3.jpg" />
+    <None Remove="Imatges\Home3.png" />
+    <None Remove="Imatges\Home4.png" />
+    <None Remove="Imatges\Home5.png" />
+    <None Remove="Imatges\Home6.png" />
+    <None Remove="Imatges\Home7.png" />
+    <None Remove="Imatges\Home8.png" />
+    <None Remove="Imatges\Home9.png" />
+    <None Remove="Imatges\HomeAfegir.jpg" />
+    <None Remove="Noies.txt" />
+    <None Remove="Nois.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Imatges\Camarer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\CamarerAfegir.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\Dona1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\Dona2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\Dona3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\DonaAfegir.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\exitSign.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\Home1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\Home2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imatges\Home3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Noies.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Nois.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Imatges\HomeAfegir.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
