@@ -8,10 +8,9 @@ namespace Class
 {
     public class Escenari : Grid
     {
-        
+        Pickachu pika;
+        Pokeball pokeball;
         Random _random = new();
-        StreamReader nomsNois = new("Nois.txt");
-        StreamReader nomsNoies = new("Noies.txt");
         /// <summary>
         /// Crea un escenari donades unes mides
         /// </summary>
@@ -39,27 +38,8 @@ namespace Class
                     PosaPosicio(Tauler[i, j]);
                 }
             }
-            for (int i = 0; i < nHomes; i++)
-            {
-                CreaHome();
-            }
-            for (int i = 0; i < nDones; i++)
-            {
-                CreaDona();
-            }
-            for (int i = 0; i < nCambrers; i++)
-            {
-                CreaCambrer();
-            }
-            
-        }
-        /// <summary>
-        /// Tanca l'escenari
-        /// </summary>
-        public void Close()
-        {
-            nomsNoies.Close();
-            nomsNois.Close();
+            CreaPokeball();
+            CreaPickachu();
         }
         /// <summary>
         /// Retorna el número de files de l'escenari
@@ -84,7 +64,7 @@ namespace Class
         /// <summary>
         /// Obtè la TaulaPersones que guarda l'escenari
         /// </summary>
-        public TaulaPersones Gent { get; } = new();
+       
         /// <summary>
         /// Obte una matriu de tot l'escenari
         /// </summary>
@@ -100,14 +80,13 @@ namespace Class
         /// <param name="colDesti">Columna de la coordenada de destí</param>
         private void Mou(int filOrig, int colOrig, int filDesti, int colDesti) 
         {
-            string nom = (Tauler[filOrig, colOrig] as Persona).Nom;
-            int idx = Children.IndexOf(Gent[nom]);
-            Gent[nom].Fila = filDesti;
-            Gent[nom].Columna = colDesti;
-            Tauler[filDesti, colDesti] = Gent[nom];
+            
+            pika.Fila = filDesti;
+            pika.Columna = colDesti;
+            Tauler[filDesti, colDesti] = pika;
             Tauler[filOrig, colOrig] = new("",filOrig,colOrig);
-            SetRow(Children[idx], filDesti);
-            SetColumn(Children[idx], colDesti);
+            SetRow(pika, filDesti);
+            SetColumn(pika, colDesti);
         }
         /// <summary>
         /// Retorna la Posició que hi ha en una coordenada donada
@@ -156,20 +135,10 @@ namespace Class
             if (!Tauler[fil, col].EsBuida)
             {
                 Persona p = Tauler[fil, col] as Persona;
-                if (p.EsConvidat())
-                {
-                    Convidat c = p as Convidat;
-                    if (c.EsHome)
-                        NumHomes--;
-                    else
-                        NumDones--;
-                }
-                else
-                    NumCambrers--;
+                
 
                 Children.Remove(Tauler[fil, col]);
                 Tauler[fil, col] = new("",fil,col);
-                Gent.EliminaPersona(p);
             }
         }
         /// <summary>
@@ -197,64 +166,41 @@ namespace Class
         /// <summary>
         /// Crea Home a una posicio aleatoria
         /// </summary>
-        public void CreaHome()
+        public void CreaPickachu()
         {
             List<Posicio> l = LlistaPosicionsBuides;
             Posicio p = l[_random.Next(l.Count)];
-            CreaHome(p.Fila, p.Columna);
+            CreaPickachu(p.Fila, p.Columna);
         }
         /// <summary>
         /// Crea Home a una posicio donada
         /// </summary>
-        public void CreaHome(int fila, int columna)
+        public void CreaPickachu(int fila, int columna)
         {
-            Home h = new(nomsNois.ReadLine(), _random.Next(4));
+            pika = new();
             
-            h.Fila = fila;
-            h.Columna = columna;
-            ObteImatge(h);
-            Posa(h);
-        }
-        /// <summary>
-        /// Crea Dona a una posicio aleatoria
-        /// </summary>
-        public void CreaDona()
-        {
-            List<Posicio> l = LlistaPosicionsBuides;
-            Posicio p = l[_random.Next(l.Count)];
-            CreaDona(p.Fila, p.Columna);
-        }
-        /// <summary>
-        /// Crea Dona a una posicio donada
-        /// </summary>
-        public void CreaDona(int fila, int columna)
-        {
-            Dona d = new(nomsNoies.ReadLine(), _random.Next(4));
-            
-            d.Fila = fila;
-            d.Columna = columna;
-            ObteImatge(d);
-            Posa(d);
+            pika.Fila = fila;
+            pika.Columna = columna;
+            Posa(pika);
         }
         /// <summary>
         /// Crea Cambrer a una posicio aleatoria
         /// </summary>
-        public void CreaCambrer()
+        public void CreaPokeball()
         {
             List<Posicio> l = LlistaPosicionsBuides;
             Posicio p = l[_random.Next(l.Count)];
-            CreaCambrer(p.Fila, p.Columna);
+            CreaPokeball(p.Fila, p.Columna);
         }
         /// <summary>
         /// Crea Cambrer a una posicio donada
         /// </summary>
-        public void CreaCambrer(int fila, int columna)
+        public void CreaPokeball(int fila, int columna)
         {
-            Cambrer c = new();
-            c.Fila = fila;
-            c.Columna = columna;
-            ObteImatge(c);
-            Posa(c);
+            pokeball = new();
+            pokeball.Fila = fila;
+            pokeball.Columna = columna;
+            Posa(pokeball);
         }
         /// <summary>
         /// Posa una Persona dins de l'escenari i a la taula de persones
@@ -268,20 +214,8 @@ namespace Class
             SetColumn(pers, pers.Columna);
             SetRow(pers, pers.Fila);
             Children.Add(pers);
-            Gent.AfegeixPersona(pers);
+            
             Tauler[pers.Fila, pers.Columna] = pers;
-            if (pers.EsConvidat())
-            {
-                Convidat c = pers as Convidat;
-                if (c.EsHome)
-                {
-                    NumHomes++;
-                }
-                else
-                    NumDones++;
-            }
-            else
-                NumCambrers++;
         }
         /// <summary>
         /// Coloca una posicio dins del grid, fent les assignacions que pertoquen
@@ -301,99 +235,44 @@ namespace Class
         {
             Buida(pers.Fila, pers.Columna);
         }
-        /// <summary>
-        /// Obté un nom d'un fitxer de noms que no s'estigui fent servir
-        /// </summary>
-        /// <param name="fitxer">Fitxer de noms</param>
-        /// <returns>El nom triat</returns>
-        private String ObteNom(String fitxer)
-        {
-            //No s'utilitza perque ja assigno els noms automaticament de l'arxiu
-            return null;
-        }
-        /// <summary>
-        /// Assigna una Imatge aleatòria a la persona segons sigui
-        /// Home, dona o cambrer
-        /// </summary>
-        /// <param name="p"></param>
-        private void ObteImatge(Persona p)
-        {
-            String prefix;
-            if (p.EsConvidat())
-            {
-                Convidat c = p as Convidat;
-                if (c.EsHome)
-                {
-                    prefix = "Home";
-                }
-                else
-                    prefix = "Dona";
-                p.Icona = (ImageSource)FindResource(prefix + _random.Next(1,4) + "Key");
-            }
-            else
-                p.Icona = (ImageSource)FindResource("CambrerKey");
-
-        }
         #endregion
-
-        /// <summary>
-        /// Mira si en el tauler hi ha alguna persona amb aquest nom
-        /// </summary>
-        /// <param name="nom">Nom a cercar</param>
-        /// <returns>Si hi ha coincidència</returns>
-        public bool NomRepetit(string nom) 
-        {
-            try
-            {
-                _ = Gent[nom];
-                return true;
-            }
-            catch 
-            {
-                return false;
-            }
-            
-        }
         /// <summary>
         /// Fa que totes les persones facin un moviment
         /// </summary>
         public void Cicle() 
         {
-            foreach (KeyValuePair<String,Persona> kvp in Gent)
-            {
-                Persona persona = kvp.Value;
-                Direccio direccio = persona.OnVaig(this);
-                switch (direccio)
-                {
-                    case Direccio.Nord:
-                        Mou(persona.Fila, persona.Columna, persona.Fila - 1, persona.Columna);
-                        break;
-                    case Direccio.Nordest:
-                        Mou(persona.Fila, persona.Columna, persona.Fila - 1, persona.Columna + 1);
-                        break;
-                    case Direccio.Est:
-                        Mou(persona.Fila, persona.Columna, persona.Fila, persona.Columna + 1);
-                        break;
-                    case Direccio.Sudest:
-                        Mou(persona.Fila, persona.Columna, persona.Fila + 1, persona.Columna + 1);
-                        break;
-                    case Direccio.Sud:
-                        Mou(persona.Fila, persona.Columna, persona.Fila + 1, persona.Columna);
-                        break;
-                    case Direccio.Sudoest:
-                        Mou(persona.Fila, persona.Columna, persona.Fila + 1, persona.Columna - 1);
-                        break;
-                    case Direccio.Oest:
-                        Mou(persona.Fila, persona.Columna, persona.Fila, persona.Columna - 1);
-                        break;
-                    case Direccio.Noroest:
-                        Mou(persona.Fila, persona.Columna, persona.Fila - 1, persona.Columna - 1);
-                        break;
-                    default:
-                        break;
-                }
-            }
             
+            Persona persona = pika;
+            Direccio direccio = persona.OnVaig(this);
+            switch (direccio)
+            {
+                case Direccio.Nord:
+                    Mou(persona.Fila, persona.Columna, persona.Fila - 1, persona.Columna);
+                    break;
+                case Direccio.Nordest:
+                    Mou(persona.Fila, persona.Columna, persona.Fila - 1, persona.Columna + 1);
+                    break;
+                case Direccio.Est:
+                    Mou(persona.Fila, persona.Columna, persona.Fila, persona.Columna + 1);
+                    break;
+                case Direccio.Sudest:
+                    Mou(persona.Fila, persona.Columna, persona.Fila + 1, persona.Columna + 1);
+                    break;
+                case Direccio.Sud:
+                    Mou(persona.Fila, persona.Columna, persona.Fila + 1, persona.Columna);
+                    break;
+                case Direccio.Sudoest:
+                    Mou(persona.Fila, persona.Columna, persona.Fila + 1, persona.Columna - 1);
+                    break;
+                case Direccio.Oest:
+                    Mou(persona.Fila, persona.Columna, persona.Fila, persona.Columna - 1);
+                    break;
+                case Direccio.Noroest:
+                    Mou(persona.Fila, persona.Columna, persona.Fila - 1, persona.Columna - 1);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

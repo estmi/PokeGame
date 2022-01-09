@@ -15,6 +15,8 @@ namespace Class
     public abstract class Persona:Posicio
     {
         Point posInicial;
+        Direccio direccio;
+        public Direccio Direccio {  get { return direccio; } set { direccio = value; } }
         /// <summary>
         /// Crea una persona
         /// </summary>
@@ -59,18 +61,7 @@ namespace Class
         /// <param name="col">Columan de la posició</param>
         /// <param name="esc">Escenari on estan situats</param>
         /// <returns>Atracció quantificada</returns>
-        private double Atraccio(int fil, int col, Escenari esc)
-        {
-            double atraccio = 0;
-            foreach (KeyValuePair<String,Persona> kvp in esc.Gent)
-            {
-                Persona persona = kvp.Value;
-                if (persona.Columna != col && persona.Fila != fil)
-                    atraccio+= Interes(persona) / Distancia(esc[fil, col], persona );
-            }
-            //return Interes(esc[fil, col]) / Distancia(this, new("", fil, col));
-            return atraccio;
-        }
+        
         /// <summary>
         /// Decideix quin serà el següent moviment que farà la persona
         /// </summary>
@@ -78,91 +69,41 @@ namespace Class
         /// <returns>Una de les 5 possibles direccions (Quiet, Amunt, Avall, Dreta, Esquerra</returns>
         public Direccio OnVaig(Escenari esc)
         {
-            List<Direccio> llista = new() { Direccio.Quiet };
-            double gran = Atraccio(Fila, Columna, esc);
-            Dictionary<Direccio,Double > onAnire = new();
-            if (esc.DestiValid(Fila-1,Columna))
-            {   
+            List<Direccio> llista = new() { Direccio };
+            if (esc.DestiValid(Fila-1,Columna)&&Direccio!=Direccio.Sud)
+            {
                 //Nord
-                double atracAct = Atraccio(Fila - 1, Columna, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Nord };
-                else if (atracAct == gran) llista.Add(Direccio.Nord);
+                llista.Add(Direccio.Nord);
             }    
 
-            if (esc.DestiValid(Fila - 1, Columna+1))
+            if (esc.DestiValid(Fila, Columna+1) && Direccio != Direccio.Oest)
             {
-                double atracAct = Atraccio(Fila - 1, Columna+1, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Nordest};
-                else if (atracAct == gran) llista.Add(Direccio.Nordest);
+                llista.Add(Direccio.Est);
             }
 
-            if (esc.DestiValid(Fila, Columna+1))
+            if (esc.DestiValid(Fila + 1, Columna) && Direccio != Direccio.Nord)
             {
-                double atracAct = Atraccio(Fila, Columna + 1, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Est };
-                else if (atracAct == gran) llista.Add(Direccio.Est);
+                llista.Add(Direccio.Sud);
             }
 
-            if (esc.DestiValid(Fila + 1, Columna+1))
+            if (esc.DestiValid(Fila , Columna-1) && Direccio != Direccio.Est)
             {
-                double atracAct = Atraccio(Fila + 1, Columna + 1, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Sudest };
-                else if (atracAct == gran) llista.Add(Direccio.Sudest);
+                llista.Add(Direccio.Oest);
             }
             
-
-            if (esc.DestiValid(Fila + 1, Columna))
-            {
-                double atracAct = Atraccio(Fila + 1, Columna, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Sud };
-                else if (atracAct == gran) llista.Add(Direccio.Sud);
-            }
+            Direccio onVaig = llista[random.Next(llista.Count)];
             
-
-            if (esc.DestiValid(Fila + 1, Columna-1))
+            if (onVaig != Direccio)
             {
-                double atracAct = Atraccio(Fila + 1, Columna - 1, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Sudoest };
-                else if (atracAct == gran) llista.Add(Direccio.Sudoest);
+                Direccio = onVaig;
+                Nom = Direccio.ToString();
+                return Direccio.Quiet;
             }
-            
-
-            if (esc.DestiValid(Fila , Columna-1))
+            else
             {
-                double atracAct = Atraccio(Fila , Columna - 1, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Oest };
-                else if (atracAct == gran) llista.Add(Direccio.Oest);
+                return Direccio;
             }
-            
-
-            if (esc.DestiValid(Fila -1, Columna-1))
-            {
-                double atracAct = Atraccio(Fila - 1, Columna - 1, esc);
-
-                if (atracAct > gran) llista = new() { Direccio.Noroest };
-                else if (atracAct == gran) llista.Add(Direccio.Noroest);
-            }
-            
-            return llista[random.Next(llista.Count)];
         }
-        /// <summary>
-        /// Interès de la persona sobre una determinada posició
-        /// </summary>
-        /// <param name="pos">Posició</param>
-        /// <returns>Interès quantificat</returns>
-        public abstract int Interes(Posicio pos);
-        /// <summary>
-        /// Determina si la persona es un convidat (home o dona) o un cambrer
-        /// </summary>
-        /// <returns>Retorna si és convidat</returns>
-        public abstract bool EsConvidat();
     }
 
 }

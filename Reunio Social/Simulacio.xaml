@@ -18,24 +18,7 @@
         <StackPanel x:Name="stkPanel">
             <Button x:Name="btnSurt" Content="Surt" Click="btnSurt_Click"/>
             <Button x:Name="btnCicle" Content="Cicle" Click="btnCicle_Click"/>
-            <Button x:Name="btnSimpaties" Content="Simpaties" Click="btnSimpaties_Click"/>
-            <Image Source="{StaticResource CamarerAdd}" PreviewMouseLeftButtonDown="btnAdd_PreviewMouseLeftButtonDown"
-                MouseMove="btnAdd_MouseMove"
-                Tag="Cambrer"/>
-            
-                <Image Source="{StaticResource HomeAddKey}" PreviewMouseLeftButtonDown="btnAdd_PreviewMouseLeftButtonDown"
-                MouseMove="btnAdd_MouseMove"
-                Tag="Home"/>
-            
-            
-                <Image Source="{StaticResource DonaAddKey}" PreviewMouseLeftButtonDown="btnAdd_PreviewMouseLeftButtonDown"
-                MouseMove="btnAdd_MouseMove"
-                Tag="Dona"/>
-            
-                    <Image Source="{StaticResource ExitKey}" AllowDrop="True"
-                    DragEnter="btnAdeu_DragEnter"/>
-            
-            
+
         </StackPanel>
         
 

@@ -5,18 +5,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Noies.txt" />
-    <None Remove="Nois.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Noies.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Nois.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
 </Project>

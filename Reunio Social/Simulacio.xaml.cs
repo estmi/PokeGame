@@ -62,30 +62,7 @@ namespace ReunioSocial
                 // La posem a la seva nova posicio
                 Escenari.Posa(p);
             }
-            // Si es un tipus de persona (Quan fem Drag'n'Drop de les imatges de l'esquerra) la crearem segons que sigui
-            else if (e.Data.GetDataPresent("PERSONATIPUS"))
-            {
-                Escenari Escenari = sender as Escenari;
-                Posicio pos = e.Source as Posicio;
-                String tipus = e.Data.GetData("PERSONATIPUS") as String;
-                // Depenent de quin tipus de persona sigui creara una persona o una altra
-                switch (tipus)
-                {
-                    case "Cambrer":
-                        //s.Escenari.Buida(pos.Fila, pos.Columna);
-                        Escenari.CreaCambrer(pos.Fila, pos.Columna);
-                        break;
-                    case "Home":
-                        //s.Escenari.Buida(pos.Fila, pos.Columna);
-                        Escenari.CreaHome(pos.Fila, pos.Columna);
-                        break;
-                    case "Dona":
-                        //s.Escenari.Buida(pos.Fila, pos.Columna);
-                        Escenari.CreaDona(pos.Fila, pos.Columna);
-                        break;
-                    default: break;
-                }
-            }
+           
         }
         // Nomes pot activar-se amb AllowDrop de el senyal de Exit ja que tots els altres estan handled
         private void Simulacio_Drop(object sender, DragEventArgs e)
@@ -106,15 +83,10 @@ namespace ReunioSocial
             Escenari.Cicle();
         }
 
-        private void btnSimpaties_Click(object sender, RoutedEventArgs e)
-        {
-            Window wnd = new Simpaties(Escenari.Gent);
-            wnd.ShowDialog();
-        }
+        
 
         private void btnSurt_Click(object sender, RoutedEventArgs e)
         {
-            Escenari.Close();
             Close();
         }
 
@@ -124,25 +96,7 @@ namespace ReunioSocial
             posInicial = e.GetPosition(null);
         }
 
-        private void btnAdd_MouseMove(object sender, MouseEventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("Move1");
-
-            Point posicioActual = e.GetPosition(null);
-            Vector desplacament = posInicial - posicioActual;
-            if (e.LeftButton == MouseButtonState.Pressed &&
-                (Math.Abs(desplacament.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                Math.Abs(desplacament.Y) > SystemParameters.MinimumVerticalDragDistance
-                ))
-            {
-                //System.Diagnostics.Debug.WriteLine("Move2");
-
-                Image btn = sender as Image;
-                
-                DataObject dadesArrosegades = new DataObject("PERSONATIPUS", btn.Tag as String);
-                DragDrop.DoDragDrop(btn, dadesArrosegades, DragDropEffects.Move);
-            }
-        }
+        
 
         private void btnAdeu_DragEnter(object sender, DragEventArgs e)
         {
