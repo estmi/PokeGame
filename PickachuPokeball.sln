@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reunio Social", "Reunio Social\Reunio Social.csproj", "{FD1BC410-CBD8-4871-8212-F9E25E350FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PickachuPokeball", "Reunio Social\PickachuPokeball.csproj", "{FD1BC410-CBD8-4871-8212-F9E25E350FDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{0BA7594B-5E9B-4867-A6D8-02D38EA44A02}"
 EndProject
